@@ -1,0 +1,147 @@
+USB-DASK/X Release Note
+
+=================================================================
+                    Table Of Contents 
+=================================================================
+* USB-DASK 20.10 Release Notes
+  + USB-DASK 20.10 Hardware Support
+  + Miscellaneous bug fixes
+  + Miscellaneous
+  
+* USB-DASK/X 19.10 Release Notes
+  + USB-DASK/X 19.10 Hardware Support
+  + USB-DASK/X 19.10 Features
+  
+* USB-DASK/X 1.0.2 Release Notes
+  + USB-DASK/X 1.0.2 Hardware Support
+  + Features changed in USB-DASK/X 1.0.2
+  
+* USB-DASK/X 1.0.1 Release Notes
+  + USB-DASK/X 1.0.1 Hardware Support
+  + Features changed in USB-DASK/X 1.0.1
+
+* USB-DASK/X 1.0.0 Release Notes
+  + USB-DASK/X 1.0.0 Hardware Support
+  + USB-DASK/X 1.0.0 Features
+
+-----------------------------------------------------------------
+     WD-DASK 20.10 Release Notes
+-----------------------------------------------------------------
+     
+**** USB-DASK 20.10 Hardware Support ****
+
+ * USB-1902
+ * USB-1903
+ * USB-1901
+ * USB-2405
+ * USB-2401 / USB-2401a
+ * USB-7250
+ * USB-7230
+ * USB-1210  
+
+**** Miscellaneous bug fixes ****
+ * Solve the problem of ErrorTransferCountTooLarge judgement error. 
+ * Solve the problem that Overrun cannot function normally.
+ 
+**** Miscellaneous **** 
+ * Support debian package install flow.
+
+
+-----------------------------------------------------------------
+     USB-DASK/X 19.10 Release Notes
+-----------------------------------------------------------------
+
+**** USB-DASK/X 19.10 Hardware Support ****
+
+ * USB-1902
+ * USB-1903
+ * USB-1901
+ * USB-2405
+ * USB-2401 / USB-2401a
+ * USB-7250
+ * USB-7230
+ * USB-1210    
+
+**** USB-DASK/X 19.10 Features ****
+
+The following features are supported in USB-DASK/X 19.10 :
+ * Device modules support Linux Kernel 4.15.0, and are tested with Ubuntu 18.04 LTS. 
+   (the message shown by 'uname -a' is 
+     "4.15.0-20-generic #21-Ubuntu SMP Tue Apr 24 06:16:15 UTC 2018 x86_64 x86_64 x86_64 GNU/Linux" )
+   (the message shown by 'cat /etc/lsb-release is
+     "DISTRIB_ID=Ubuntu 
+     "DISTRIB_RELEASE=18.04
+     "DISTRIB_CODENAME=bionic
+     "DISTRIB_DESCRIPTION="Ubuntu 18.04 LTS" )
+ * Update USB-2405 firmware bin file.
+     * 20191029_1200
+
+	 
+-----------------------------------------------------------------
+     USB-DASK/X 1.0.2 Release Notes
+-----------------------------------------------------------------
+
+**** USB-DASK/X 1.0.2 Hardware Support ****
+
+ * USB-1902
+ * USB-1903
+ * USB-1901
+ * USB-2405
+ * USB-2401 / USB-2401a
+ * USB-7250
+ * USB-7230
+ * USB-1210    
+
+**** Features changed in USB-DASK/X 1.0.2 ****
+
+1. Support new FPGA version of format recognition.
+2. Support on fly change feature to USB-190x series.
+   
+-----------------------------------------------------------------
+     USB-DASK/X 1.0.1 Release Notes
+-----------------------------------------------------------------
+
+**** USB-DASK/X 1.0.1 Hardware Support ****
+
+ * USB-1902
+ * USB-1903
+ * USB-1901
+ * USB-2405
+ * USB-2401 / USB-2401a
+ * USB-7250
+ * USB-7230
+ * USB-1210    
+
+**** Features changed in USB-DASK/X 1.0.1 ****
+
+1. For finite Analog-output, the UD_AO_AsyncCheck() sets 'Stopped' parameter after all AO-pattern had been sent out.
+   ( that parameter is set after AO data had been transferred to USB-1902/1903 in previous version)
+
+
+-----------------------------------------------------------------
+     USB-DASK/X 1.0.0 Release Notes
+-----------------------------------------------------------------
+
+**** USB-DASK/X 1.0.0 Hardware Support ****
+
+ * USB-1902
+ * USB-1903
+ * USB-1901
+ * USB-2405
+ * USB-2401 / USB-2401a
+ * USB-7250
+ * USB-7230
+ * USB-1210    
+
+**** USB-DASK/X 1.0.0 Features ****
+
+The following features are supported in USB-DASK/X 1.0.0 :
+ * The drivers for x86_64 are supported.
+ * Device modules support Linux Kernel 3.19.0, and are tested with Ubuntu 14.04.3 LTS. 
+   (the message shown by 'uname -a' is 
+     "3.19.0-25-generic #26~14.04.1-Ubuntu SMP Fri Jul 24 21:16:20 UTC 2015 x86_64 x86_64 x86_64 GNU/Linux" )
+ * The shared-library, libusb_dask64.so, is migrated from Windows library, UD-DASK.dll. 
+ * The Changed-of-Status Interrupt is notified with the poll-interface. Additional API, UD_Get_FileHandle(), is used to get the file-descriptor.
+ * Installation / Un-installation scripts support
+ * DAQUSBCvt64 is ready to file format conversion
+

@@ -1,0 +1,74 @@
+This file describes the installation and configuration for UD-DASK Linux Driver
+
+
+STEP 1: INSTALL DEBIAN FILE
+===========================
+
+Use command line or Software install application to install the deb file.
+Command line:
+	sudo dpkg -i <deb file name>
+
+Software install application:
+	1. Right click the deb file -> Select "Properties" -> 
+	   Click the "Open with" tab -> Select "Software install" to be the default application
+	2. Double click the deb file to install it
+
+After installation, the directory at /user/local/adlink/ud-dask will be generated with the following
+subdirectories and files:
+----------------------------------------------------------------------
+conf/        contains the default setting and the user setting folder
+             User can configure the card setting by use reconfig.sh
+             Please DONT MODIFY THE DEFAULT SETTING FOLDER
+         
+include/     contains header file for user to build samples
+
+samples/     contains some sample programs for ADLink DAQ devices
+
+util/        contains utilities which will used by shell script 'reconfig.sh'
+
+ref/         contains utilities used in the previous version.
+             It is not suitable for the current design.
+             * Warning * These files are for reference only, please do not use directly. 
+         
+RelNotes/    detail the corrections, changes or enhancement made to the UD-DASK
+
+reconfig.sh/ User can change default config by use this shell script
+             New config will take effect after reboot       
+----------------------------------------------------------------------
+
+STEP 2: CONFIGURE AND INSTALL DEVICE
+====================================
+
+Because of the PCI-bus architecture, the ADLINK UD devices can be detected
+automatically. 
+
+Besides, modules and library will setup and insert after install the debian file.
+All user has to do is use 'reconfig.sh' file to check the current setting is suitable
+or not, and modify it if needed. 
+
+**** Warning ****
+
+ * Please don't change the path or it will occures errors while uninstall.
+ * There is a tar file in the ref folder, which contains the complete package data.
+   Users can move to their home folder for modifation.
+   All files in /usr/local/adlink/ud-dask will be removed while uninstall.
+   
+
+STEP 3: CHECK THE CONFIGURATION AND MODIFY
+==========================================
+
+Execute the 'reconfig.sh'.
+It will display the card which is inserted and its current setting.
+
+(1) Change to User Setting
+    User can see the all setting table with or without the card insert after choose this option.
+    Choose the card and fill the value to configure setting.
+    There is also a option 'Reset to Default' to reset the selected card to default setting.
+
+(2) Restore original factory settings
+    This option will erase all the change and rollback to the default.
+
+User can use CTRL+C to terminate the script if you just want to check the setting list.
+Reboot is required for the new configuration to be effective. User can decide to reboot now
+or later.
+

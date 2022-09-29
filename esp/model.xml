@@ -1,0 +1,114 @@
+<project name="Pump_Demo_Update_RMSA_6400" threads="1" pubsub="auto" heartbeat-interval="1">
+  <metadata>
+    <meta id="studioUploadedBy">anonymousUser</meta>
+    <meta id="studioUploaded">1652859899047</meta>
+    <meta id="studioModifiedBy">anonymousUser</meta>
+    <meta id="studioModified">1652955856294</meta>
+    <meta id="layout">{"cq1":{"CalcRMSA":{"x":-105,"y":-255},"Pump_Demo_Update_RMSA_6400":{"x":-105,"y":-430},"Source":{"x":-105,"y":-425},"Score":{"x":-105,"y":-80},"ModelReader":{"x":145,"y":-255}}}</meta>
+  </metadata>
+  <mas-modules>
+    <mas-module module="New_Module_1" language="python" func-names="calc_stats">
+      <description><![CDATA[Sliding window summary statistics]]></description>
+      <code><![CDATA[import math
+from collections import deque
+sliding_window=deque(maxlen=6400)
+
+def calc_stats(id,ch0):
+    "Output: Y_axis, _outOpcode"
+
+    global sliding_window
+    if len(sliding_window) < 6399:
+        sliding_window.append(ch0*ch0)
+        return 0.0, ''
+    
+    # Remove first and add new element
+    #del sliding_window[0]
+    
+    sliding_window.append(ch0*ch0)
+    Y_axis = math.sqrt(sum(list(sliding_window))/len(list(sliding_window)))
+
+    # Reset, we are jumping
+    sliding_window.clear()
+
+    _outOpcode='insert'
+    return Y_axis, _outOpcode]]></code>
+    </mas-module>
+  </mas-modules>
+  <contqueries>
+    <contquery name="cq1">
+      <windows>
+        <window-source pubsub="true" index="pi_EMPTY" insert-only="true" autogen-key="true" name="Source">
+          <schema>
+            <fields>
+              <field name="id" type="int64" key="true"/>
+              <field name="ch0" type="double"/>
+            </fields>
+          </schema>
+          <connectors>
+            <connector class="mqtt" name="New_Connector_1">
+              <properties>
+                <property name="type"><![CDATA[pub]]></property>
+                <property name="mqtthost"><![CDATA[localhost]]></property>
+                <property name="mqtttopic"><![CDATA[test/t1]]></property>
+                <property name="mqttqos"><![CDATA[0]]></property>
+                <property name="mqttmsgtype"><![CDATA[csv]]></property>
+              </properties>
+            </connector>
+          </connectors>
+        </window-source>
+        <window-calculate pubsub="true" index="pi_EMPTY" produces-only-inserts="true" name="CalcRMSA" algorithm="MAS">
+          <schema>
+            <fields>
+              <field name="id" type="int64" key="true"/>
+              <field name="Y_axis" type="double"/>
+            </fields>
+          </schema>
+          <mas-map>
+            <window-map module="New_Module_1" function="calc_stats" revision="0" source="Source"/>
+          </mas-map>
+        </window-calculate>
+        <window-model-reader name="ModelReader" model-type="astore">
+          <parameters>
+            <properties>
+              <property name="reference"><![CDATA[/data/SVDD_Model_RMSA_03_Stoch.sasast]]></property>
+              <property name="action"><![CDATA[load]]></property>
+              <property name="type"><![CDATA[astore]]></property>
+            </properties>
+          </parameters>
+        </window-model-reader>
+        <window-score name="Score">
+          <schema>
+            <fields>
+              <field name="id" type="int64" key="true"/>
+              <field name="Y_axis" type="double"/>
+              <field name="_SVDDDISTANCE_" type="double"/>
+              <field name="_SVDDSCORE_" type="double"/>
+            </fields>
+          </schema>
+          <models>
+            <offline model-type="astore">
+              <input-map>
+                <properties>
+                  <property name="Y_axis"><![CDATA[Y_axis]]></property>
+                </properties>
+              </input-map>
+              <output-map>
+                <properties>
+                  <property name="Y_axis"><![CDATA[Y_axis]]></property>
+                  <property name="_SVDDDISTANCE_"><![CDATA[_SVDDDISTANCE_]]></property>
+                  <property name="_SVDDSCORE_"><![CDATA[_SVDDSCORE_]]></property>
+                </properties>
+              </output-map>
+            </offline>
+          </models>
+        </window-score>
+      </windows>
+      <edges>
+        <edge source="Source" target="CalcRMSA" role="data"/>
+        <edge source="CalcRMSA" target="Score" role="data"/>
+        <edge source="ModelReader" target="Score" role="model"/>
+        <edge source="Source" target="CalcRMSA" role="request"/>
+      </edges>
+    </contquery>
+  </contqueries>
+</project>
