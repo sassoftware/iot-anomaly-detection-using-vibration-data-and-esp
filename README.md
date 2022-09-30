@@ -1,5 +1,19 @@
 # Detecting Industrial Equipment Anomalies using SAS ESP
 
+## Table of Contents
+
+* [Overview](#overview)
+* [Objective](#objective)
+* [Prerequisites](#prerequisites)
+* [Steps](#steps)
+	* [1. DAQ configuration](#1.-daq-configuration)
+	* [2. ESP on Edge Analytics](#2.-esp-on-edge-analytics)
+	* [3. ESP Model](#3.-esp-model)
+* [Contributing](#contributing)
+* [License](#license)
+* [Additional Resources](#additional-resources)
+
+
 ## Overview
 
 This is a simple demo to demonstrate anomaly detection using a real-time vibration data and SAS ESP. Input data is flowing in via MQTT at a rate of 12.8 kHz. Then we calculate RMSA every second. After that, SVDD model for is used for scoring. The SVDD model was trained using separately on SAS Studio. As shown in the video below, we made a  device with 2 rotating fans (one with normal fan and another with a blade broken) and used SVDD to detect when the condition of the machine (fan) changes. The output is SVDD distance (top graph) and SVDD score (bottom graph). When the normal fan is rotating, the score is -1 (normal state) but when the device is switched to the broken fan, the SVDD score changes to 1 (faulty state).   
