@@ -20,7 +20,7 @@
 This is a simple demo to demonstrate anomaly detection using a real-time vibration data and SAS ESP. Input data is flowing in via MQTT at a rate of 12.8 kHz. Then we calculate RMSA every second. After that, SVDD model for is used for scoring. The SVDD model was trained using separately on SAS Studio. As shown in the video below, we made a  device with 2 rotating fans (one with normal fan and another with a blade broken) and used SVDD to detect when the condition of the machine (fan) changes. The output is SVDD distance (top graph) and SVDD score (bottom graph). When the normal fan is rotating, the score is -1 (normal state) but when the device is switched to the broken fan, the SVDD score changes to 1 (faulty state).   
 
 [![Simple Fan Device](/images/fan.png)](
-http://sas-social.brightcovegallery.com/sharing?videoId=6313068435112
+http://sas-social.brightcovegallery.com/sharing?videoId=6313064583112
  "Simple Fan Device")
  
 
