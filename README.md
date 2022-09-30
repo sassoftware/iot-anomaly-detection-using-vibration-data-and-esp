@@ -1,14 +1,12 @@
 # Detecting Industrial Equipment Anomalies using SAS ESP
 
-
-
 ## Overview
 
 This is a simple demo to demonstrate anomaly detection using a real-time vibration data and SAS ESP. Input data is flowing in via MQTT at a rate of 12.8 kHz. Then we calculate RMSA every second. After that, SVDD model for is used for scoring. The SVDD model was trained using separately on SAS Studio. As shown in the video below, we made a  device with 2 rotating fans (one with normal fan and another with a blade broken) and used SVDD to detect when the condition of the machine (fan) changes. The output is SVDD distance (top graph) and SVDD score (bottom graph). When the normal fan is rotating, the score is -1 (normal state) but when the device is switched to the broken fan, the SVDD score changes to 1 (faulty state).   
 
 Click [here](http://sas-social.brightcovegallery.com/sharing?videoId=6313064583112) to see a video overview. 
 
-### Objective
+## Objective
 The goal of this demo is to show ESP's capabilities in the field of machine condition monitoring and condition-based maintenance. We prepared a simple fan device shown below, which we can switch between normal and failure modes. We attached an accelerometer to gather the vibration data and it was collected by ADLink USB-2405 DAQ. It is also possible to use ADLink MCM-100 DAQ (edge device) which is basically a DAQ device and also a PC. 
 
 ![FAN](/images/Fan.png "FAN")
@@ -35,7 +33,7 @@ This demo is based on the paper [Condition-Based Monitoring Using SAS® Event St
 
 The SVDD model was trained separately using SAS studio with a 3 minute long RMSA data taken at different rotation speed (RPM). The parameter for the SVDD algorithm were set to automatic with RBF bandwidth parameter 0.3.  
 
-### Prerequisites
+## Prerequisites
 List of required hardware:
 - [Simple fan device](http://sas-social.brightcovegallery.com/sharing?videoId=6313068435112)
 - ADLink data acquisition device (DAQ) to collect the vibration data from sensors (USB-2405 or MCM-100)
@@ -76,7 +74,5 @@ This project is not accepting contributions
 
 ## Additional Resources
 - [SAS Event Stream Processing 2021.1.5 Documentation](https://go.documentation.sas.com/doc/en/espcdc/v_014/espwlcm/home.htm)
-
 - [Six hints for improving sensor data quality](https://communities.sas.com/t5/SAS-Communities-Library/Six-hints-for-improving-sensor-data-quality/ta-p/813677)
-
 - [Why data quality really matters in analyzing sensor data](https://communities.sas.com/t5/SAS-Communities-Library/Why-data-quality-really-matters-in-analyzing-sensor-data/ta-p/813657)
