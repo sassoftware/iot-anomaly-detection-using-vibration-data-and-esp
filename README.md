@@ -17,27 +17,26 @@
 
 ## Overview
 
-This is a simple demo to demonstrate anomaly detection using a real-time vibration data and SAS ESP. Input data is flowing in via MQTT at a rate of 12.8 kHz. Then we calculate RMSA every second. After that, SVDD model for is used for scoring. The SVDD model was trained using separately on SAS Studio. As shown in the video below, we made a  device with 2 rotating fans (one with normal fan and another with a blade broken) and used SVDD to detect when the condition of the machine (fan) changes. The output is SVDD distance (top graph) and SVDD score (bottom graph). When the normal fan is rotating, the score is -1 (normal state) but when the device is switched to the broken fan, the SVDD score changes to 1 (faulty state).   
+This simple demo was developed to demonstrate anomaly detection using a real-time vibration data and SAS Event Stream Processing (ESP). Input data is flowing in via MQTT at a rate of 12.8 kHz with RMSA calculated every second. After that, an SVDD model for is used for scoring. (Note: The SVDD model was trained using SAS Studio) As shown in the video below, the team made a device with two rotating fans (one with normal fan and another with a blade broken) and used SVDD to detect when the condition of the machine (fan) changes. The output is SVDD distance (top graph) and SVDD score (bottom graph). When the normal fan is rotating, the score is -1 (normal state) but when the device is switched to the broken fan, the SVDD score changes to 1 (faulty state).   
 
 [![Simple Fan Device](/images/fan2.png)](
 http://sas-social.brightcovegallery.com/sharing?videoId=6313064583112
  "Simple Fan Device")
  
-
 ## Objective
-The goal of this demo is to show ESP's capabilities in the field of machine condition monitoring and condition-based maintenance. We prepared a simple fan device shown below, which we can switch between normal and failure modes. We attached an accelerometer to gather the vibration data and it was collected by ADLink USB-2405 DAQ. It is also possible to use ADLink MCM-100 DAQ (edge device) which is basically a DAQ device and also a PC. 
+The objective of the demo is to demonstrate ESP's capabilities in the field of machine condition monitoring and condition-based maintenance. The team prepared a simple fan device shown below which we can switch between normal and failure modes. They attached an accelerometer to gather the vibration data and send to an ADLink USB-2405 DAQ. (Note: Alternatively, you can use an ADLink MCM-100 DAQ (edge device) which is basically a DAQ device and a PC) 
 
 ![FAN](/images/Fan.png "FAN")
 
-As mentioned above, the device we prepared for this demo has one normal fan and another one with a broken blade as shown below. 
+As mentioned above, the device has one normal fan and one broken blade as shown below. 
 
 ![FAN](/images/Fan2.png "FAN Model")
 
-You can refer to the circuit diagram below for more information and for the list of required components to make the fan failure simulator. For more information please refer to this [pdf](https://gitlab.sas.com/IOT/demos/anomaly-detection-using-esp/-/blob/master/fan%20simulator/Fan_Failure_Simulator.pdf).
+You can refer to the circuit diagram below for more information and for the list of required components to make the fan failure simulator. For more information please refer to this [video](http://sas-social.brightcovegallery.com/sharing?videoId=6313068435112) or [pdf](https://gitlab.sas.com/IOT/demos/anomaly-detection-using-esp/-/blob/master/fan%20simulator/Fan_Failure_Simulator.pdf).
 
 ![Circuit Diagram!](/images/CircuitDiagram.png "Circuit Diagram")
 
-We used ADLink MCM-100 to collect the vibration data through one of the 4 channels. Since it's an edge device, you can deploy ESP (edge) on it.
+The team used ADLink MCM-100 to collect the vibration data through one of the 4 channels. Since it's an edge device, you can deploy ESP (edge) on it.
 
 ![MCM-100!](/images/MCM-100.png "MCM-100")
 
